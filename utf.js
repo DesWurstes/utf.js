@@ -1,3 +1,10 @@
+/**
+ * UTF.js
+ * https://github.com/DesWurstes/utf.js
+ * Made by github.com/DesWurstes
+ * Copyright (c) 2018 DesWurstes MIT License
+ */
+
 function FromString(str) {
 	const len = str.length;
 	var ret = new Uint32Array(len);
