@@ -39,32 +39,27 @@ function FromUTF8(str) {
 		if ((c & 64) == 0) {
 			return [];
 		}
+		i++;
+		const d = str[i];
 		if ((c & 32) == 0) {
-			i++;
-			ret[a] = ((c & 31) << 6) | (str[i] & 63);
+			ret[a] = ((c & 31) << 6) | (d & 63);
 			if ((d & 192) == 128) {
 				continue;
 			}
 			return [];
 		}
+		i++;
+		const e = str[i];
 		if ((c & 16) == 0) {
-			i++;
-			const d = str[i];
-			i++;
-			const e = str[i];
 			ret[a] = ((c & 15) << 12) | ((d & 63) << 6) | ((e & 63));
 			if (((d & 192) == 128) && ((e & 192) == 128)) {
 				continue;
 			}
 			return [];
 		}
+		i++;
+		const f = str[i];
 		if ((c & 8) == 0) {
-			i++;
-			const d = str[i];
-			i++;
-			const e = str[i];
-			i++;
-			const f = str[i];
 			ret[a] = ((c & 7) << 18) | ((d & 63) << 12) | ((e & 63) << 6) | ((f & 63));
 			if (((d & 192) == 128) && ((e & 192) == 128) && ((f & 192) == 128)) {
 				continue;

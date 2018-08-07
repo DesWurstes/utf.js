@@ -1,6 +1,6 @@
 # Utf.js
 
-Simply, it allows you to convert between UTF-8, 16, 32 and String. 1.8 KB when minified.
+Simply, it allows you to convert between UTF-8, 16, 32 and String. 1.7 KB when minified.
 
 ### Documentation
 
@@ -32,16 +32,16 @@ They are passed an `Uint32Array` of UTF-32. `ToUTF8` and `ToUTF16` return a `[]`
 
 ### Sample Use
 
-Let's say we want to encode our string "abc" as UTF-8 byte array. How do we do that?
+Let's say we want to encode a string as UTF-8 byte array. How do we do that?
 
 ```javascript
-ToUTF8(FromString("abc"));
+var utf8 = ToUTF8(FromString("hi! 😮"));
 ```
 
-How to convert UTF-8 to UTF-32?
+How to decode UTF-8?
 
 ```javascript
-FromUTF8("abc");
+console.log(ToString(FromUTF8(utf8)));
 ```
 
 Note: This is beta software
