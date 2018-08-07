@@ -1,7 +1,6 @@
 /**
  * UTF.js
  * https://github.com/DesWurstes/utf.js
- * Made by github.com/DesWurstes
  * Copyright (c) 2018 DesWurstes MIT License
  */
 
@@ -84,7 +83,7 @@ function FromUTF16(str) {
 		i++;
 		const d = str[i];
 		if ((c >= 0xdc00) || (d < 0xdc00)) {
-			throw utfError;
+			return [];
 		}
 		ret[a] = ((c - 0xD800) << 10) + d + 0x2400;
 	}
@@ -145,7 +144,7 @@ function ToUTF8(str) {
 			ret[a] = c & 63 | 128;
 			continue;
 		}
-		throw utfError;
+		return [];
 	}
 	return ret.slice(0, a);
 }
