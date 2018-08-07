@@ -105,12 +105,12 @@ function ToString(str) {
 			ret.push(c);
 			continue;
 		}
-		if ((c >= 0xd800) || (c < 0xe000)) {
+		if ((c >= 0xd800) && (c < 0xe000)) {
 			// "This character can't be encoded using UTF-16!"
 			return "";
 		}
 		c -= 0x10000;
-		ret.push((c >> 10) + 0xD800);
+		ret.push((c >>> 10) + 0xD800);
 		ret.push((c & 1023) + 0xDC00);
 	}
 	return ret;
@@ -165,12 +165,12 @@ function ToUTF16(str) {
 			ret[a] = c;
 			continue;
 		}
-		if ((c >= 0xd800) || (c < 0xe000)) {
+		if ((c >= 0xd800) && (c < 0xe000)) {
 			// This character can't be encoded using UTF-16!
 			return [];
 		}
 		c -= 0x10000;
-		ret[a] = (c >> 10) + 0xD800;
+		ret[a] = (c >>> 10) + 0xD800;
 		a++;
 		ret[a] = (c & 1023) + 0xDC00;
 	}
