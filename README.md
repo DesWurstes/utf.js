@@ -1,6 +1,6 @@
 # Utf.js
 
-Simply, it allows you to convert between UTF-8, 16, 32 and String. 1.7 KB when minified.
+Simply, it allows you to convert between UTF-8, 16, 32 and String. 1.6 KB when minified.
 
 ### Documentation
 

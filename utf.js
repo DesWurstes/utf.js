@@ -91,21 +91,11 @@ function FromUTF16(str) {
 }
 
 function ToString(str) {
-	const len = str.length;
+	const a = ToUTF16(str);
+	const len = a.length;
 	var ret = "";
 	for (var i = 0; i < len; i++) {
-		let c = str[i];
-		if ((c < 0xd800) || ((c >= 0xe000) && (c < 0x10000))) {
-			ret.push(c);
-			continue;
-		}
-		if ((c >= 0xd800) && (c < 0xe000)) {
-			// "This character can't be encoded using UTF-16!"
-			return "";
-		}
-		c -= 0x10000;
-		ret.push((c >>> 10) + 0xD800);
-		ret.push((c & 1023) + 0xDC00);
+		ret += String.fromCharCode(a[i]);
 	}
 	return ret;
 }
