@@ -1,4 +1,5 @@
 /**
+ * @license
  * UTF.js
  * https://github.com/DesWurstes/utf.js
  * Copyright (c) 2018 DesWurstes MIT License
@@ -6,23 +7,11 @@
 
 function FromString(str) {
 	const len = str.length;
-	var ret = new Uint32Array(len);
-	var a = 0;
-	for (var i = 0; i < len; i++, a++) {
-		const c = str.charCodeAt(i);
-		if ((c < 0xd800) || (c >= 0xe000)) {
-	 		ret[a] = c;
-			continue;
-		}
-		i++;
-		const d = str.charCodeAt(i);
-		if ((c >= 0xdc00) || (d < 0xdc00)) {
-			return [];
-		}
-		// ret[a] = ((c - 0xD800) << 10) + d - 0xDC00 + 0x1000
-		ret[a] = (c - 0xD800 << 10) + d + 0x2400;
+	var ret = new Uint16Array(len);
+	for (var i = 0; i < len; i++) {
+		ret[i] = str.charCodeAt(i);
 	}
-	return ret.slice(0, a);
+	return FromUTF16(ret);
 }
 
 function FromUTF8(str) {
@@ -85,6 +74,7 @@ function FromUTF16(str) {
 		if ((c >= 0xdc00) || (d < 0xdc00)) {
 			return [];
 		}
+		// ret[a] = ((c - 0xD800) << 10) + d - 0xDC00 + 0x1000
 		ret[a] = ((c - 0xD800) << 10) + d + 0x2400;
 	}
 	return ret.slice(0, a);
